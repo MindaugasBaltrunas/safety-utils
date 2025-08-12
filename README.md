@@ -1,9 +1,4 @@
-# Safety Utils
-
-[![npm version](https://badge.fury.io/js/safety-utils.svg)](https://www.npmjs.com/package/safety-utils)
-[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
-
-A comprehensive TypeScript utility package for preventing Cross-Site Scripting (XSS) attacks through safe data sanitization and display functions.
+# XSS Safe Display
 
 ## Features
 
@@ -19,21 +14,21 @@ A comprehensive TypeScript utility package for preventing Cross-Site Scripting (
 ## Installation
 
 ```bash
-npm install safety-utils
+npm install xss-safe-display
 ```
 
 ```bash
-yarn add safety-utils
+yarn add xss-safe-display
 ```
 
 ```bash
-pnpm add safety-utils
+pnpm add xss-safe-display
 ```
 
 ## Quick Start
 
 ```typescript
-import { safeDisplay, sanitizeRequestData, sanitizeString } from 'safety-utils';
+import { safeDisplay, sanitizeRequestData, sanitizeString } from 'xss-safe-display';
 
 // Safe text display
 const userInput = "<script>alert('xss')</script>";
@@ -64,7 +59,7 @@ import {
   sanitizeObject,
   escapeHTML,
   sanitizeUrl
-} from 'safety-utils';
+} from 'xss-safe-display';
 ```
 
 #### `sanitizeString(input: string): string`
@@ -120,7 +115,7 @@ sanitizeUrl('data:text/html,<script>');    // ❌ Blocked
 ### safeDisplay Object
 
 ```typescript
-import { safeDisplay } from 'safety-utils';
+import { safeDisplay } from 'xss-safe-display';
 ```
 
 #### `safeDisplay.text(value: string | number | undefined | null): string`
@@ -170,7 +165,7 @@ import {
   sanitizeValue,
   sanitizeValues,
   sanitizeFields
-} from 'safety-utils';
+} from 'xss-safe-display';
 ```
 
 #### `sanitizeRequestData<T>(data: T): T`
@@ -254,7 +249,7 @@ const selective = sanitizeFields(userData, ['displayName', 'bio']);
 
 ```tsx
 import React from 'react';
-import { safeDisplay, sanitizeRequestData } from 'safety-utils';
+import { safeDisplay, sanitizeRequestData } from 'xss-safe-display';
 
 // Safe text component
 function SafeText({ children }: { children: any }) {
@@ -298,7 +293,7 @@ function UserForm() {
 
 ```typescript
 import express from 'express';
-import { sanitizeRequestData, sanitizeFields } from 'safety-utils';
+import { sanitizeRequestData, sanitizeFields } from 'xss-safe-display';
 
 const app = express();
 app.use(express.json());
@@ -344,7 +339,7 @@ app.put('/api/profile', sanitizeSpecificFields(['bio', 'website']), (req, res) =
 </template>
 
 <script setup>
-import { safeDisplay, sanitizeRequestData } from 'safety-utils';
+import { safeDisplay, sanitizeRequestData } from 'xss-safe-display';
 
 const safeText = safeDisplay.text;
 const safeHtml = (content, tags) => safeDisplay.html(content, tags).__html;
@@ -361,7 +356,7 @@ const submitForm = (formData) => {
 ### 1. User Registration/Login Forms
 
 ```typescript
-import { sanitizeRequestData } from 'safety-utils';
+import { sanitizeRequestData } from 'xss-safe-display';
 
 interface RegistrationForm {
   username: string;
@@ -389,7 +384,7 @@ const handleRegistration = async (formData: RegistrationForm) => {
 ### 2. Content Management
 
 ```typescript
-import { sanitizeFields, safeDisplay } from 'safety-utils';
+import { sanitizeFields, safeDisplay } from 'xss-safe-display';
 
 interface BlogPost {
   title: string;
@@ -423,7 +418,7 @@ const BlogPostComponent = ({ post }) => (
 ### 3. Search Functionality
 
 ```typescript
-import { sanitizeValue } from 'safety-utils';
+import { sanitizeValue } from 'xss-safe-display';
 
 const handleSearch = async (query: string, filters: string[]) => {
   // Sanitize search input
@@ -437,7 +432,7 @@ const handleSearch = async (query: string, filters: string[]) => {
 ### 4. API Response Sanitization
 
 ```typescript
-import { sanitizeFields } from 'safety-utils';
+import { sanitizeFields } from 'xss-safe-display';
 
 // Sanitize data before sending to client
 const getUserProfile = async (userId: string) => {
@@ -581,8 +576,8 @@ declare const safeDisplay: SafeDisplay;
 import xss from 'xss';
 const clean = xss(input);
 
-// After (safety-utils)
-import { sanitizeString } from 'safety-utils';
+// After (xss-safe-display)
+import { sanitizeString } from 'xss-safe-display';
 const clean = sanitizeString(input);
 ```
 
@@ -597,8 +592,8 @@ const sanitizeForm = (data) => {
   }, {});
 };
 
-// After (safety-utils)
-import { sanitizeRequestData } from 'safety-utils';
+// After (xss-safe-display)
+import { sanitizeRequestData } from 'xss-safe-display';
 const sanitized = sanitizeRequestData(data); // Handles passwords automatically
 ```
 
@@ -636,10 +631,10 @@ ISC © [Mindaugas Baltrunas]
 
 ## Links
 
-- 📦 **NPM**: https://www.npmjs.com/package/safety-utils
+- 📦 **NPM**: https://www.npmjs.com/package/xss-safe-display
 - 📚 **Repository**: https://github.com/MindaugasBaltrunas/safety-utils
 - 🐛 **Issues**: https://github.com/MindaugasBaltrunas/safety-utils/issues
-- 📖 **Documentation**: https://github.com/MindaugasBaltrunas/safety-utils#readme
+- 📖 **Documentation**: https://github.com/MindaugasBaltrunas/safety-utils/issues#readme
 
 ---
 
