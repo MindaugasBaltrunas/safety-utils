@@ -1,6 +1,6 @@
 {
-  "name": "safety-utils",
-  "version": "0.0.1",
+  "name": "xss-safe-display",
+  "version": "0.0.2",
   "description": "A TypeScript project using pnpm as the package manager.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
