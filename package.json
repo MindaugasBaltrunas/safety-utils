@@ -13,15 +13,44 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "xssGuard",
-    "sanitizeString",
-    "sanitizeHTML",
-    "sanitizeObject",
+    "xss",
+    "xss-protection",
+    "xss-prevention",
+    "xss-sanitizer",
+    "security",
+    "sanitize",
+    "sanitization",
+    "html-sanitizer",
+    "html-escape",
+    "url-sanitizer",
+    "content-security",
+    "safe-display",
+    "input-validation",
+    "html-purify",
+    "cross-site-scripting",
+    "web-security",
+    "typescript",
+    "react",
+    "vue",
+    "angular",
+    "dompurify",
     "escapeHTML",
-    "sanitizeUrl"
+    "sanitizeHTML",
+    "sanitizeString",
+    "sanitizeObject",
+    "sanitizeUrl",
+    "xssGuard"
   ],
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MindaugasBaltrunas/safety-utils.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MindaugasBaltrunas/safety-utils/issues"
+  },
+  "homepage": "https://github.com/MindaugasBaltrunas/safety-utils#readme",
   "devDependencies": {
     "@types/express": "^5.0.3",
     "@types/node": "^22.15.32",
