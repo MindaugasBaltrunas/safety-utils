@@ -1,6 +1,6 @@
 {
   "name": "xss-safe-display",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A TypeScript project using pnpm as the package manager.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -58,6 +58,7 @@
   },
   "dependencies": {
     "dompurify": "^3.2.6",
+    "isomorphic-dompurify": "^2.26.0",
     "tsup": "^8.5.0"
   }
 }
