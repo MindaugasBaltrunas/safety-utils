@@ -1,26 +1,31 @@
 import DOMPurify from 'dompurify';
 
+/**
+ * Strip all HTML tags from a string.
+ */
 export const sanitizeString = (value: string): string => {
-  if (!value) return value;
-  
+  if (!value) return '';
+
   try {
     return DOMPurify.sanitize(value, {
-      ALLOWED_TAGS: [], 
-      ALLOWED_ATTR: [] 
+      ALLOWED_TAGS: [],
+      ALLOWED_ATTR: []
     });
   } catch (error) {
     console.error('XSS sanitize error:', error);
-    
     return value.replace(/<[^>]*>/g, '');
   }
 };
 
+/**
+ * Sanitize HTML while allowing a configurable set of tags and attributes.
+ */
 export const sanitizeHTML = (
-  html: string, 
+  html: string,
   allowedTags: string[] = ['b', 'i', 'u', 'p', 'span', 'br']
 ): string => {
   if (!html) return '';
-  
+
   try {
     return DOMPurify.sanitize(html, {
       ALLOWED_TAGS: allowedTags,
@@ -28,37 +33,54 @@ export const sanitizeHTML = (
     });
   } catch (error) {
     console.error('HTML sanitize error:', error);
-    return sanitizeString(html); 
+    return sanitizeString(html);
   }
 };
 
+/**
+ * Recursively sanitize strings in objects or arrays.
+ */
 export const sanitizeObject = <T>(obj: T): T => {
-  if (!obj || typeof obj !== 'object') {
-    return obj;
-  }
-  
+  if (!obj || typeof obj !== 'object') return obj;
+
   if (Array.isArray(obj)) {
-    return obj.map(item => sanitizeObject(item)) as unknown as T;
+    return obj.map(item => {
+      if (typeof item === 'string') {
+        // Apply the same sanitization to array elements
+        if (/<script\b[^>]*>(.*?)<\/script>/gi.test(item)) {
+          return '';
+        }
+        return item.replace(/<[^>]*>/g, '');
+      }
+      if (item && typeof item === 'object') {
+        return sanitizeObject(item);
+      }
+      return item;
+    }) as unknown as T;
   }
-  
-  const sanitizedObj: Record<string, any> = {};
-  
-  Object.entries(obj as Record<string, any>).forEach(([key, value]) => {
-    if (typeof value === 'string') {
-      sanitizedObj[key] = sanitizeString(value);
-    } else if (typeof value === 'object' && value !== null) {
-      sanitizedObj[key] = sanitizeObject(value);
-    } else {
-      sanitizedObj[key] = value;
-    }
-  });
-  
-  return sanitizedObj as unknown as T;
+
+  return Object.fromEntries(
+    Object.entries(obj as Record<string, any>).map(([key, value]) => {
+      if (typeof value === 'string') {
+        if (/<script\b[^>]*>(.*?)<\/script>/gi.test(value)) {
+          return [key, ''];
+        }
+        return [key, value.replace(/<[^>]*>/g, '')];
+      }
+      if (value && typeof value === 'object') {
+        return [key, sanitizeObject(value)];
+      }
+      return [key, value];
+    })
+  ) as T;
 };
 
+
+/**
+ * Escape HTML entities in a string.
+ */
 export const escapeHTML = (text: string): string => {
-  if (!text) return text;
-  
+  if (!text) return '';
   return text
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -67,18 +89,22 @@ export const escapeHTML = (text: string): string => {
     .replace(/'/g, '&#039;');
 };
 
+/**
+ * Sanitize URLs to allow only http, https, or mailto. Default to '#' if invalid.
+ */
 export const sanitizeUrl = (url: string): string => {
   if (!url) return '#';
-  const urlPattern = /^(?:(?:https?|mailto):\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
-  
-  if (urlPattern.test(url)) {
-    if (!url.startsWith('http') && !url.startsWith('mailto:')) {
-      return `https://${url}`;
-    }
+
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('mailto:')) {
     return url;
   }
-  
-  return '#'; 
+
+  // Simple domain pattern fallback
+  if (/^[\w.-]+\.[\w\.-]+/.test(url)) {
+    return `https://${url}`;
+  }
+
+  return '#';
 };
 
 export const xssGuard = {
