@@ -402,7 +402,7 @@ MIT © [Your Name]
 
 ## Support
 
-- 📚 [Documentation](https://github.com/yourusername/xss-safe-display#readme)
-- 🐛 [Issue Tracker](https://github.com/yourusername/xss-safe-display/issues)
-- 💬 [Discussions](https://github.com/yourusername/xss-safe-display/discussions)
-- 📧 [Email Support](mailto:support@yourpackage.com)
+- 📚 [Documentation](https://github.com/MindaugasBaltrunas/xss-safe-display#readme)
+- 🐛 [Issue Tracker](https://github.com/MindaugasBaltrunas/xss-safe-display/issues)
+- 💬 [Discussions](https://github.com/MindaugasBaltrunas/xss-safe-display/discussions)
+- 📧 [Email Support](mailto:mindebaltru@gmail.com)

@@ -1,6 +1,6 @@
 {
   "name": "xss-safe-display",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "A TypeScript library for safe display and sanitization to prevent XSS attacks.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -46,12 +46,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MindaugasBaltrunas/safety-utils.git"
+    "url": "git+https://github.com/MindaugasBaltrunas/xss-safe-display.git"
   },
   "bugs": {
-    "url": "https://github.com/MindaugasBaltrunas/safety-utils/issues"
+    "url": "https://github.com/MindaugasBaltrunas/xss-safe-display/issues"
   },
-  "homepage": "https://github.com/MindaugasBaltrunas/safety-utils#readme",
+  "homepage": "https://github.com/MindaugasBaltrunas/xss-safe-display#readme",
   "engines": {
     "node": ">=14.0.0"
   },
